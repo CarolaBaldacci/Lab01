@@ -14,6 +14,9 @@ public class FXMLController {
 	
 	Parole elenco ;
 
+	@FXML
+    private Button btnCancella;
+	
     @FXML
     private ResourceBundle resources;
 
@@ -33,13 +36,35 @@ public class FXMLController {
     private Button btnReset;
 
     @FXML
+    void doCancella(ActionEvent event) {
+    	elenco.removeParola(txtResult.getSelectedText());
+    	txtResult.clear();
+    	String result="";
+    	for(String p:elenco.getElenco()) {
+    		result += p+"\n";
+    	}
+    	txtResult.setText(result);
+    	txtParola.clear();
+    	
+    }
+    
+    @FXML
     void doInsert(ActionEvent event) {
-    	// TODO
+    	String parolaInserita= txtParola.getText();
+    	elenco.addParola(parolaInserita);
+    	txtResult.clear();
+    	String result="";
+    	for(String p:elenco.getElenco()) {
+    		result += p+"\n";
+    	}
+    	txtResult.setText(result);
+    	txtParola.clear();
     }
 
     @FXML
     void doReset(ActionEvent event) {
-    	// TODO
+    	elenco.reset();
+    	txtResult.clear();
     }
 
     @FXML
